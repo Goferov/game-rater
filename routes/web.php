@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\GameController;
 use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\User\ShowAddress;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 
@@ -22,5 +24,5 @@ Route::get('/', function () {
 Route::get('users', [UserController::class, 'list'])
     ->name('get.users');
 
-Route::get('users/{id}', [ProfileController::class, 'show'])
+Route::get('users/{userId}', [UserController::class, 'show'])
     ->name('get.users.profile');
