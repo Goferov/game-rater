@@ -5,7 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Faker\Factory;
 
-class ShowAddress extends Controller
+class ShowAddressController extends Controller
 {
     public function __invoke()
     {
