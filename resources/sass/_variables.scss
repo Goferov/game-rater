@@ -1,7 +1,9 @@
-// Body
-$body-bg: #f8fafc;
+// Import Bootstrap variables for use within theme
+@import "~bootstrap/scss/functions.scss";
+@import "~bootstrap/scss/variables.scss";
 
-// Typography
-$font-family-sans-serif: 'Nunito', sans-serif;
-$font-size-base: 0.9rem;
-$line-height-base: 1.6;
+// Import spacing variables
+@import "variables/spacing";
+
+// Import navigation variables
+@import "variables/navigation";
