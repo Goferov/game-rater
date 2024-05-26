@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title', 255);
             $table->text('description')->nullable();
             $table->string('publisher', 100)->comment('Game publisher');
-            $table->float('score')->nullable();
+            $table->integer('score')->nullable();
             $table->timestamps();
         });
     }
