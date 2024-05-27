@@ -7,16 +7,17 @@
     <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
     Użytkownicy
 </a>
-<a class="nav-link" href="#">
-    <div class="sb-nav-link-icon"><i class="fas fa-plus"></i></div>
-    Dodaj
-</a>
 
 <div class="sb-sidenav-menu-heading">Gry</div>
+<a class="nav-link" href="{{ route('games.dashboard') }}">
+    <div class="sb-nav-link-icon"><i class="fas fa-gamepad"></i></div>
+    Dashboard
+</a>
 <a class="nav-link" href="{{ route('games.index') }}">
     <div class="sb-nav-link-icon"><i class="fas fa-gamepad"></i></div>
-    Gry
+    Lista
 </a>
+
 <a class="nav-link" href="#">
     <div class="sb-nav-link-icon"><i class="fas fa-plus"></i></div>
     Dodaj
