@@ -31,6 +31,9 @@ Route::get('users/{id}/address', ShowAddressController::class)
     ->where(['id' => '[0-9]+'])
     ->name('get.users.address');
 
+Route::get('games/dashboard', [GameController::class, 'dashboard'])
+    ->name('games.dashboard');
+
 Route::resource('games', GameController::class)
     ->only(['index', 'show']);
 
