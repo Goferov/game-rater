@@ -9,9 +9,6 @@ use Illuminate\View\View;
 
 class GameController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(): View
     {
         $games = Game::with('genre')
