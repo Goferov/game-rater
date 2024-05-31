@@ -4,7 +4,7 @@ namespace App\Repository;
 
 use App\Models\Game;
 
-class GameRepository
+class GameRepository implements GameRepositoryInterface
 {
 
     private Game $gameModel;

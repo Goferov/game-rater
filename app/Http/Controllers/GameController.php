@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Repository\GameRepository;
+use App\Repository\GameRepositoryInterface;
 use Illuminate\View\View;
 
 class GameController extends Controller
 {
-    private GameRepository $gameRepository;
+    private GameRepositoryInterface $gameRepository;
 
     public function __construct(GameRepository $gameRepository)
     {
