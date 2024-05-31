@@ -2,56 +2,38 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Game;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Repository\GameRepository;
 use Illuminate\View\View;
 
 class GameController extends Controller
 {
+    private GameRepository $gameRepository;
+
+    public function __construct(GameRepository $gameRepository)
+    {
+        $this->gameRepository = $gameRepository;
+    }
+
     public function index(): View
     {
-        $games = Game::with('genre')
-            ->paginate(10);
-
         return view('game.list', [
-            'games' => $games
+            'games' => $this->gameRepository->allPaginated()
         ]);
     }
 
     public function dashboard(): View
     {
-        $bestGames = Game::best()->get();
-
-        $stats = [
-            'count' => Game::count(),
-            'countScoreGtSeven' => Game::where('score', '>', 7)->count(),
-            'max' => Game::max('score'),
-            'min'=> Game::min('score'),
-            'avg'=> Game::avg('score'),
-        ];
-
-        $scoreStats = Game::select(
-            Game::raw('count(*) as count'), 'score'
-        )
-            ->having('count', '>', 10)
-            ->groupBy('score')
-            ->orderBy('count', 'desc')
-            ->get();
-
         return view('game.dashboard', [
-            'bestGames' => $bestGames,
-            'stats' => $stats,
-            'scoreStats' => $scoreStats
+            'bestGames' => $this->gameRepository->best(),
+            'stats' => $this->gameRepository->stats(),
+            'scoreStats' => $this->gameRepository->scoreStats()
         ]);
     }
 
     public function show(int $gameId): View
     {
-        $game = Game::find($gameId);
-
         return view('game.show', [
-            'game' => $game
+            'game' => $this->gameRepository->get($gameId)
         ]);
     }
 }
