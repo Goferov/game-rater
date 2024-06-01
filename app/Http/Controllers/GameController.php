@@ -10,7 +10,7 @@ class GameController extends Controller
 {
     private GameRepositoryInterface $gameRepository;
 
-    public function __construct(GameRepository $gameRepository)
+    public function __construct(GameRepositoryInterface $gameRepository)
     {
         $this->gameRepository = $gameRepository;
     }
