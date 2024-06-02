@@ -5,13 +5,37 @@
         <div class="card">
             <div class="card-header"><i class="fas fa-table mr-1"></i>Gry</div>
             <div class="card-body">
-                <div class="table-responsive">
+
+                <form class="form-inline" action="{{ route('games.list') }}">
+                    <div class="form-row">
+                        <label class="my-1 mr-2" for="phrase">Szukana fraza:</label>
+                        <div class="col">
+                            <input type="text" class="form-control" name="phrase" placeholder="" value="{{ $phrase ?? '' }}">
+                        </div>
+
+                        @php
+                        $selectedType = $selectedType ?? '';
+                        @endphp
+                        <div class="col-auto">
+                            <select class="custom-select mr-sm-2" name="type">
+                        @foreach($allTypes as $key => $type)
+                                    <option @if ($selectedType == $key) selected @endif value="{{ $key }}">{{ $type }}</option>
+                        @endforeach
+                            </select>
+                        </div>
+
+                    <button type="submit" class="btn btn-primary mb-1">Wyszukaj</button>
+            </div>
+            </form>
+
+
+            <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                         <tr>
-                            <th>Lp</th>
                             <th>Id</th>
                             <th>Tytuł</th>
+                            <th>Rodzaj</th>
                             <th>Ocena</th>
                             <th>Gatunek</th>
                             <th>Opcje</th>
@@ -19,9 +43,9 @@
                         </thead>
                         <tfoot>
                         <tr>
-                            <th>Lp</th>
                             <th>Id</th>
                             <th>Tytuł</th>
+                            <th>Rodzaj</th>
                             <th>Ocena</th>
                             <th>Gatunek</th>
                             <th>Opcje</th>
@@ -30,9 +54,9 @@
                         <tbody>
                         @foreach($games ?? [] as $game)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
                                 <td>{{ $game->id }}</td>
                                 <td>{{ $game->name }}</td>
+                                <td>{{ $game->type }}</td>
                                 <td>{{ $game->score ?? 'brak' }}</td>
                                 <td>{{ $game->genres->implode('name', ', ') }}</td>
                                 <td>

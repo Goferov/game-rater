@@ -64,4 +64,26 @@ class GameRepository implements GameRepositoryInterface
             ->orderBy('metacritic_score', 'desc')
             ->get();
     }
+
+    public function filterBy(?string $phrase, string $type = self::TYPE_DEFAULT, int $limit = 15)
+    {
+        $query =  $this->gameModel
+                    ->with('genres')
+                    ->orderBy('created_at');
+
+
+        if(!isset(self::ALL_TYPES[$type])) {
+            $type = self::TYPE_DEFAULT;
+        }
+
+        if($type !== self::TYPE_ALL) {
+            $query->where('type', $type);
+        }
+
+        if($phrase) {
+            $query->whereRaw('name LIKE ?', ["$phrase%"]);
+        }
+
+        return $query->paginate($limit);
+    }
 }
