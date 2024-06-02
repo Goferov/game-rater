@@ -15620,3 +15620,7 @@ body {
 #layoutAuthentication {
   margin-top: 60px;
 }
+
+.user-avatar {
+  max-width: 250px;
+}

@@ -7,13 +7,40 @@
 
             <form action="{{ route('me.update') }}" method="post" enctype="multipart/form-data">
                 @csrf
-                @if( $user-> avatar )
-                    <div>Jest avatar</div>
+                @if($user->avatar)
+                    <img src="{{ asset('storage/' . $user->avatar) }}" class="rounded mx-auto d-block user-avatar">
                 @else
                     <img src="/images/avatar.png" class="rounded mx-auto d-block">
                 @endif
 
                 <div class="form-group">
+
+                    <div class="form-group">
+                        <label for="avatar">Wybierz avatar ...</label>
+                        <input
+                            type="file"
+                            class="form-control-file"
+                            id="avatar"
+                            name="avatar"
+                        >
+                        @error('avatar')
+                        <div class="invalid-feedback d-block">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
+                        @if($user->avatar)
+                            <input
+                                type="checkbox"
+                                class=" custom-checkbox"
+                                id="delete-avatar"
+                                name="delete-avatar"
+                                value="1"
+                            >
+                            <label for="delete-avatar">Usuń avatar</label>
+                        @endif
+                    </div>
+
                     <label for="name">Nazwa</label>
                     <input
                         type="text"

@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateUserProfile;
 use App\Repository\UserRepositoryInterface;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class UserController extends Controller
@@ -34,12 +35,37 @@ class UserController extends Controller
 
     public function update(UpdateUserProfile $request)
     {
+        $user = Auth::user();
+        $data = $request->validated();
+
+        if (!empty($data['avatar'])) {
+            $path = $data['avatar']->store('avatars', 'public');
+
+            if ($path) {
+                $this->deleteAvatar($user);
+                $data['avatar'] = $path;
+            }
+        }
+
+        if(isset($data['delete-avatar'])) {
+            $this->deleteAvatar($user);
+            $data['avatar'] = '';
+        }
+
+
         $this->userRepository->updateModel(
-            Auth::user(), $request->validated()
+            $user, $data
         );
 
         return redirect()
             ->route('me.profile')
             ->with('status', 'Profil zaktualizowany');
+    }
+
+    private function deleteAvatar($user)
+    {
+        if ($user->avatar && Storage::disk('public')->exists($user->avatar)) {
+            Storage::disk('public')->delete($user->avatar);
+        }
     }
 }
