@@ -13,7 +13,7 @@
                             <th>Id</th>
                             <th>Tytuł</th>
                             <th>Ocena</th>
-                            <th>Kategoria</th>
+                            <th>Gatunek</th>
                             <th>Opcje</th>
                         </tr>
                         </thead>
@@ -23,23 +23,23 @@
                             <th>Id</th>
                             <th>Tytuł</th>
                             <th>Ocena</th>
-                            <th>Kategoria</th>
+                            <th>Gatunek</th>
                             <th>Opcje</th>
                         </tr>
                         </tfoot>
                         <tbody>
-                            @foreach($games ?? [] as $game)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $game->id }}</td>
-                                    <td>{{ $game->title }}</td>
-                                    <td>{{ $game->score }}</td>
-                                    <td>{{ $game->genre->name }}</td>
-                                    <td>
-                                        <a href="{{ route('games.show', ['game' => $game->id]) }}">Szczegóły</a>
-                                    </td>
-                                </tr>
-                            @endforeach
+                        @foreach($games ?? [] as $game)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $game->id }}</td>
+                                <td>{{ $game->name }}</td>
+                                <td>{{ $game->score ?? 'brak' }}</td>
+                                <td>{{ $game->genres->implode('name', ', ') }}</td>
+                                <td>
+                                    <a href="{{ route('games.show', ['game' => $game->id]) }}">Szczegóły</a>
+                                </td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>

@@ -36,7 +36,7 @@ Route::group(['middleware' => ['auth']], function (){
         ->name('games.dashboard');
 
     Route::get('games', [GameController::class, 'index'])
-        ->name('games.index');
+        ->name('games.list');
 
     Route::get('games/{game}', [GameController::class, 'show'])
         ->name('games.show');

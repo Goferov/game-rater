@@ -1,25 +1,35 @@
 @extends('layout.main')
 
 @section('content')
-<div class="card">
-    @if(!empty($game))
-        <h5 class="card-header">{{ $game->title }}</h5>
-        <div class="card-body">
-            <ul>
-                <li>Id: {{ $game->id }}</li>
-                <li>Nazwa: {{ $game->title }}</li>
-                <li>Wydawca: {{ $game->publisher }}</li>
-                <li>Kategoria: {{ $game->genre->name }}</li>
-                <li>
-                    Opis:
-                    <div>{{ $game->description }}</div>
-                </li>
-            </ul>
+    <div class="card">
+        @if(!empty($game))
+            <h5 class="card-header">{{ $game->title }}</h5>
+            <div class="card-body">
+                <ul>
+                    <li>Id: {{ $game->id }}</li>
+                    <li>Nazwa: {{ $game->name }}</li>
+                    <li>Wydawca: {{ $game->publishers->implode('name', ', ') }}</li>
+                    <li>Gatunek:{{ $game->genres->implode('name', ', ') }}</li>
+                </ul>
+                <div class="my-4">
+                    <h4>Krótki opis</h4>
+                        <div class="mx-2">{!! $game->short_description !!}</div>
+                </div>
 
-            <a href="{{ route('games.index') }}" class="btn btn-light">Lista gier</a>
-        </div>
-    @else
-        <h5 class="card-header">Brak danych do wyświetlenia</h5>
-    @endif
-</div>
+                <div class="my-4">
+                    <h4>Opis</h4>
+                        <div class="mx-2">{!! $game->description !!}</div>
+                </div>
+
+                <div class="my-4">
+                    <h4>About</h4>
+                        <div class="mx-2">{!! $game->about !!}</div>
+                </div>
+
+                <a href="{{ route('games.list') }}" class="btn btn-light">Lista gier</a>
+            </div>
+        @else
+            <h5 class="card-header">Brak danych do wyświetlenia</h5>
+        @endif
+    </div>
 @endsection
