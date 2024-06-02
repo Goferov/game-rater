@@ -31,6 +31,7 @@ class GameRepository implements GameRepositoryInterface
     {
         return $this->gameModel->with('genres')
             ->orderBy('created_at')
+            ->with('genres')
             ->paginate($limit);
     }
 
@@ -38,6 +39,7 @@ class GameRepository implements GameRepositoryInterface
     {
         return $this->gameModel
             ->best()
+            ->with('genres')
             ->get();
     }
 
