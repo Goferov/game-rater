@@ -5,7 +5,7 @@ use App\Http\Controllers\Home\MainPageController;
 use App\Http\Controllers\User\ShowAddressController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\User\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +21,18 @@ use App\Http\Controllers\UserController;
 Route::group(['middleware' => ['auth']], function (){
     Route::get('/', MainPageController::class)
         ->name('home.mainPage');
+
+    // USER - ME
+    Route::group(['prefix' => 'me', 'as' => 'me.'], function (){
+        Route::get('profile', [UserController::class, 'profile'])
+            ->name('profile');
+
+        Route::get('edit', [UserController::class, 'edit'])
+            ->name('edit');
+
+        Route::post('update', [UserController::class, 'update'])
+            ->name('update');
+    });
 
     Route::get('users', [UserController::class, 'list'])
         ->name('get.users');
