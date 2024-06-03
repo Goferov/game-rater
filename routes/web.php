@@ -6,6 +6,7 @@ use App\Http\Controllers\User\ShowAddressController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\User\GameController as UserGameController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,18 @@ Route::group(['middleware' => ['auth']], function (){
 
         Route::post('update', [UserController::class, 'update'])
             ->name('update');
+
+        Route::get('games', [UserGameController::class, 'list'])
+            ->name('games.list');
+
+        Route::post('games', [UserGameController::class, 'add'])
+            ->name('games.add');
+
+        Route::delete('games', [UserGameController::class, 'remove'])
+            ->name('games.remove');
+
+        Route::post('games/rate', [UserGameController::class, 'rate'])
+            ->name('games.rate');
     });
 
     Route::get('users', [UserController::class, 'list'])
