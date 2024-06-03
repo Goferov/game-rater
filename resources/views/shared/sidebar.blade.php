@@ -15,7 +15,9 @@
     <a class="nav-link" href="{{ route('games.list') }}">Katalog</a>
 </nav>
 
-<div class="sb-sidenav-menu-heading">Admin panel</div>
-<nav class="sb-sidenav-menu-nested">
-    <a class="nav-link" href="{{ route('get.users') }}">Użytkownicy</a>
-</nav>
+@can('admin-level')
+    <div class="sb-sidenav-menu-heading">Admin panel</div>
+    <nav class="sb-sidenav-menu-nested">
+        <a class="nav-link" href="{{ route('get.users') }}">Użytkownicy</a>
+    </nav>
+@endcan

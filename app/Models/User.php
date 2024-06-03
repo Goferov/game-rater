@@ -70,4 +70,9 @@ class User extends Authenticatable
     {
         $this->games()->updateExistingPivot($game, ['rate' => $rate]);
     }
+
+    public function isAdmin(): bool
+    {
+        return (bool) $this->admin;
+    }
 }
