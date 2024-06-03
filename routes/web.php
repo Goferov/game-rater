@@ -5,7 +5,8 @@ use App\Http\Controllers\Home\MainPageController;
 use App\Http\Controllers\User\ShowAddressController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\User\UserController as LoggedUserController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\User\GameController as UserGameController;
 
 /*
@@ -25,13 +26,13 @@ Route::group(['middleware' => ['auth']], function (){
 
     // USER - ME
     Route::group(['prefix' => 'me', 'as' => 'me.'], function (){
-        Route::get('profile', [UserController::class, 'profile'])
+        Route::get('profile', [LoggedUserController::class, 'profile'])
             ->name('profile');
 
-        Route::get('edit', [UserController::class, 'edit'])
+        Route::get('edit', [LoggedUserController::class, 'edit'])
             ->name('edit');
 
-        Route::post('update', [UserController::class, 'update'])
+        Route::post('update', [LoggedUserController::class, 'update'])
             ->name('update');
 
         Route::get('games', [UserGameController::class, 'list'])

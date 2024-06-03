@@ -4,45 +4,28 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Repository\UserRepositoryInterface;
 use Faker\Factory;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class UserController extends Controller
 {
-    public function list(Request $request)
+
+    private UserRepositoryInterface $userRepository;
+
+    public function __construct(UserRepositoryInterface $userRepository)
     {
-        $users = [];
-
-        $faker = Factory::create();
-        $count = $faker->numberBetween(3, 15);
-        for ($i = 0; $i < $count; $i++) {
-            $users[] = [
-                'id' => $faker->numberBetween(1, 1000),
-                'name' => $faker->firstName
-            ];
-        }
-
-        return view('user.list', [
-            'users' => $users
-        ]);
+        $this->userRepository = $userRepository;
     }
 
-    public function show(int $userId)
+    public function list(Request $request): View
     {
-        $faker = Factory::create();
-        $user = [
-            'id' => $userId,
-            'name' => $faker->name,
-            'firstName' => $faker->firstName,
-            'lastName' => $faker->lastName,
-            'city' => $faker->city,
-            'age' => $faker->numberBetween(12, 25),
-            'html' => '<script>alert("XSS")</script>'
-        ];
+        return view('user.list', ['users' => $this->userRepository->all()]);
+    }
 
-        return view('user.show', [
-            'user' => $user,
-            'nick' => true
-        ]);
+    public function show(int $userId): View
+    {
+        return view('user.show', ['user' => $this->userRepository->get($userId)]);
     }
 }

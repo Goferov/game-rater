@@ -4,6 +4,7 @@
 namespace App\Repository;
 
 use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
 
 class UserRepository implements UserRepositoryInterface
 {
@@ -23,5 +24,14 @@ class UserRepository implements UserRepositoryInterface
         $user->avatar = $data['avatar'] ?? $user->avatar;
 
         $user->save();
+    }
+
+    public function all(): Collection
+    {
+        return $this->userModel->get();
+    }
+    public function get(int $id): User
+    {
+        return $this->userModel->find($id);
     }
 }
