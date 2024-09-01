@@ -35,7 +35,6 @@ class GameController extends Controller
         $gameId = (int) $data['gameId'];
 
         $game = $this->gameRepository->get($gameId);
-
         $user = Auth::user();
         $user->addGame($game);
 

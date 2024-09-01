@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\Home\MainPageController;
-use App\Http\Controllers\User\ShowAddressController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\UserController as LoggedUserController;
@@ -21,7 +20,7 @@ use App\Http\Controllers\User\GameController as UserGameController;
 */
 
 Route::group(['middleware' => ['auth']], function (){
-    Route::get('/', MainPageController::class)
+    Route::get('/', [MainPageController::class, 'index'])
         ->name('home.mainPage');
 
     // USER - ME
@@ -54,13 +53,6 @@ Route::group(['middleware' => ['auth']], function (){
     Route::get('users/{userId}', [UserController::class, 'show'])
         ->name('get.user.show');
 
-    Route::get('users/{id}/address', ShowAddressController::class)
-        ->where(['id' => '[0-9]+'])
-        ->name('get.users.address');
-
-    Route::get('games/dashboard', [GameController::class, 'dashboard'])
-        ->name('games.dashboard');
-
     Route::get('games', [GameController::class, 'index'])
         ->name('games.list');
 
@@ -71,4 +63,3 @@ Route::group(['middleware' => ['auth']], function (){
 
 
 Auth::routes();
-

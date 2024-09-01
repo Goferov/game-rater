@@ -1,18 +1,27 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
-use Carbon\Carbon;
+use App\Repository\GameRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class MainPageController extends Controller
 {
-    public function __invoke()
+    private GameRepositoryInterface $gameRepository;
+
+    public function __construct(GameRepositoryInterface $gameRepository)
     {
-        return view('home.main', ['user' => Auth::user()]);
+        $this->gameRepository = $gameRepository;
+    }
+
+    public function index()
+    {
+        return view('home.main', [
+            'user' => Auth::user(),
+            'bestGames' => $this->gameRepository->best(),
+            'stats' => $this->gameRepository->stats(),
+            'scoreStats' => $this->gameRepository->scoreStats()
+        ]);
     }
 }

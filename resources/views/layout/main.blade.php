@@ -1,10 +1,10 @@
-<html>
+<html lang="pl">
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
-    <title>App Name - @yield('title', $applicationName)</title>
+    <title>@yield('title', $applicationName)</title>
     <meta name="description" content=""/>
 
     <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
@@ -17,14 +17,13 @@
         <i class="fas fa-bars"></i>
     </button>
     <ul class="navbar-nav ml-auto">
-        <!-- Authentication Links -->
         @guest
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                <a class="nav-link" href="{{ route('login') }}">Logowanie</a>
             </li>
             @if (Route::has('register'))
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                    <a class="nav-link" href="{{ route('register') }}">Rejestracja</a>
                 </li>
             @endif
         @else
@@ -37,7 +36,7 @@
                     <a class="dropdown-item" href="{{ route('logout') }}"
                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                        {{ __('Logout') }}
+                        Wyloguj się
                     </a>
 
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

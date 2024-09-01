@@ -17,7 +17,7 @@
                         $selectedType = $selectedType ?? '';
                         @endphp
                         <div class="col-auto">
-                            <select class="custom-select mr-sm-2" name="type">
+                            <select class="custom-select mr-sm-2" name="selectedType">
                         @foreach($allTypes as $key => $type)
                                     <option @if ($selectedType == $key) selected @endif value="{{ $key }}">{{ $type }}</option>
                         @endforeach
@@ -53,6 +53,7 @@
                         </tfoot>
                         <tbody>
                         @foreach($games ?? [] as $game)
+
                             <tr>
                                 <td>{{ $game->id }}</td>
                                 <td>{{ $game->name }}</td>

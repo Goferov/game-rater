@@ -1,12 +1,12 @@
 @extends('layout.main')
 
 @section('content')
-    <div class="card">
+    <div class="card mt-3">
         @if(!empty($game))
-            <h5 class="card-header">
+            <h5 class="card-header d-flex align-items-center justify-content-between">
                 {{ $game->name }}
                 @if ($userHasGame)
-                    <form class="float-right m-0" method="post" action="{{ route('me.games.remove') }}">
+                    <form class="m-0" method="post" action="{{ route('me.games.remove') }}">
                         @method('delete')
                         @csrf
                         <div class="form-row">
@@ -15,7 +15,7 @@
                         </div>
                     </form>
                 @else
-                    <form class="float-right m-0" method="post" action="{{ route('me.games.add') }}">
+                    <form class="m-0" method="post" action="{{ route('me.games.add') }}">
                         @csrf
                         <div class="form-row">
                             <input type="hidden" name="gameId" value="{{ $game->id }}">

@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Models\Game;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class GameRepository implements GameRepositoryInterface
 {
@@ -14,7 +16,7 @@ class GameRepository implements GameRepositoryInterface
         $this->gameModel= $gameModel;
     }
 
-    public function all()
+    public function all(): array|Collection
     {
         return $this->gameModel
             ->with('genres')
