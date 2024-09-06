@@ -7,6 +7,7 @@ This web application is designed to provide users with a comprehensive way to ex
 - [Technologies](#technologies)
 - [Database design and structure](#database-design-and-structure)
 - [Design patterns](#design-patterns)
+- [Images](#images)
 - [Installation](#installation)
 
 ## Features
@@ -36,6 +37,7 @@ This web application is designed to provide users with a comprehensive way to ex
 
 ## Technologies
 - **Laravel**: PHP framework used for the backend, adhering to the MVC architecture.
+- **Laravel UI**: The application uses Laravel UI for user authentication scaffolding, including login, registration, and password reset functionality.
 - **CSS**: For styling the application.
 - **JavaScript**: Provides interactivity within the application.
 - **Bootstrap**: A front-end framework for responsive design.
@@ -54,6 +56,14 @@ The application uses SQLite for database management. Below is a brief overview o
 ## Design patterns
 
 The application follows the **Model-View-Controller (MVC)** pattern for structuring the codebase. Additionally, it uses the **Repository** design pattern to abstract the data layer, making it easier to manage database queries and business logic separately.
+
+## Images
+
+- ![Dashboard](screenshots/dashboard.png)
+- ![Details](screenshots/details.png)
+- ![Game List](screenshots/game_list.png)
+- ![List](screenshots/list.png)
+- ![Login](screenshots/login.png)
 
 ## Installation
 
@@ -80,6 +90,13 @@ To set up the Game Review Platform locally, follow these steps:
    ```bash
    php artisan migrate
 
-6. Start the development server:
+6. Install Laravel UI for authentication scaffolding:
+   ```bash
+   composer require laravel/ui
+   php artisan ui bootstrap --auth
+   npm install
+   npm run dev
+
+7. Start the development server:
    ```bash
    php artisan serve
